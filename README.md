@@ -13,4 +13,4 @@ A web application for managing culinary recipes that can be used as a personal r
 - **Temporary Storage**:  
   - Recipe data is stored in an array, with no database implementation at this stage.
   - 
-![Demo GIF](demo/Culinary Blog Application.gif)
+![Demo GIF](https://github.com/DavidIoana18/Blog-Application/blob/main/demo/Culinary%20Blog%20Application.gif)
