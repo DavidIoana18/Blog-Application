@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= isEdit ? "Edit Recipe" : "Add a New Recipe" %></title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+        <%- include("partials/header.ejs") %>
+
+        <div class = "recipe-container">
+            <div class="newtons-cradle">
+                <div class="newtons-cradle__dot"></div>
+                <div class="newtons-cradle__dot"></div>
+                <div class="newtons-cradle__dot"></div>
+                <div class="newtons-cradle__dot"></div>
+            </div>
+
+            <h2> <%= isEdit ? "Edit recipe" : "Describe your recipe" %></h2>
+            <form action = "<%= isEdit ? `/edit/${recipe.id}` : `/add` %>" method = "POST">
+                <input type="text" name="name" placeholder="Recipe name" value="<%= recipe ? recipe.name : '' %>" required>
+                <!-- Prepatation time -->
+                <input type="number" name="prepTime" placeholder="Preparation time" value="<%= recipe ? recipe.prepTime : '' %>" min="1" required>  <!-- prevent the entry of negative or zero values -->
+                <label>
+                    <input type="radio" name="prepTimeUnit"  value="min" <%= recipe && recipe.cookTimeUnit === 'min' ? 'checked' : '' %> required> Minutes
+                </label>
+                <label>
+                    <input type="radio" name="prepTimeUnit" value="h" <%= recipe && recipe.prepTimeUnit === 'h' ? 'checked' : '' %> required> Hours
+                </label>
+                
+                <!-- Cooking time -->
+                <input type="number" name="cookTime" placeholder="Cooking Time" value ="<%= recipe ? recipe.cookTime : '' %>" min="1" required> 
+                <label>
+                    <input type="radio" name="cookTimeUnit" value="min" <%= recipe && recipe.cookTimeUnit === 'min' ? 'checked' : '' %> required> Minutes
+                </label>
+                <label>
+                    <input type="radio" name="cookTimeUnit" value="h" <%= recipe && recipe.cookTimeUnit === 'h' ? 'checked' : '' %> required> Hours
+                </label>
+
+                <input type="number" name="servings" placeholder="Servings" value ="<%= recipe ? recipe.servings : '' %>" min="1" required>
+                <textarea name="ingredients" placeholder="Ingredients" rows="20" required><%= recipe ? recipe.ingredients : '' %></textarea>
+                <textarea name="recipeInstructions" placeholder="Instructions"  rows="20" required><%= recipe ? recipe.instructions : '' %></textarea>
+                
+                <input type="submit" value=<%= isEdit ? "Save" : "Add" %>>
+
+            </form>
+        </div>
+
+    <%- include("partials/footer.ejs") %>
+</body>
+</html>
+

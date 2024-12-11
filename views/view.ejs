@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= recipe.name %></title>
+    <link rel="stylesheet" href="/styles.css"></lin>
+</head>
+<body>
+
+    <%- include("partials/header.ejs") %>
+
+    <div class="details-recipe-container">
+        <h1> <%= recipe.name %></h1>
+        <p><strong>Preparation time</strong></p>
+        <%= recipe.prepTime %> <%= recipe.prepTimeUnit %>
+
+        <p><strong> Cooking time:</strong></p>
+        <%= recipe.cookTime %> <%=recipe.cookTimeUnit %>
+
+        <p><strong>Servings:</strong></p>
+        <%= recipe.servings %>
+
+        <p><strong> Ingredients:</strong></p>
+        <ul>
+            <% recipe.ingredients.split(',').forEach(ingredient => { %>
+                <li> <%= ingredient.trim() %></li>
+            <% }) %>
+        </ul>
+
+        <p><strong> Intructions:</strong></p>
+        <%= recipe.instructions %>
+
+        <div class="btn-forms">
+            <form action="/edit/<%= recipe.id %>" method="GET">
+                <button type="submit" class="edit-button">Edit</button>
+            </form>
+
+            <form action="/delete/<%= recipe.id %>" method="POST" onsubmit="return confirm('Are you sure you want to delete this recipe?');">
+                <button type="submit" class="delete-button"> Delete</button>
+            </form> 
+        </div>
+    </div>
+    <%- include("partials/footer.ejs") %>
+    
+</body>
+</html>
